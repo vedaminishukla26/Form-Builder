@@ -51,7 +51,6 @@ const CreateForm: React.FC<CreateFormProps> = ({ currentForm, onFormUpdate, isEd
       id: `field_${Date.now()}`,
       type,
       label: '',
-      required: false,
       defaultValue: type === 'checkbox' ? false : '',
       validationRules: [],
       options: (type === 'select' || type === 'radio' || type === 'checkbox') ? [] : undefined

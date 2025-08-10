@@ -7,12 +7,12 @@ import {
   Card,
   CardContent,
   CardActions,
-  Grid,
   Chip,
   IconButton,
   Paper,
   Alert
 } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import {
   Add as AddIcon,
   Preview as PreviewIcon,
@@ -32,7 +32,7 @@ interface MyFormsProps {
 
 const MyForms: React.FC<MyFormsProps> = ({ onLoadForm, onRouteChange, onEditForm }) => {
   const [forms, setForms] = useState<FormSchema[]>([]);
-  const [notification, setNotification] = useState<{message: string; type: 'success' | 'error'} | null>(null);
+  const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
   useEffect(() => {
     setForms(getStoredForms());
@@ -52,10 +52,10 @@ const MyForms: React.FC<MyFormsProps> = ({ onLoadForm, onRouteChange, onEditForm
       try {
         deleteFormById(formId);
         setForms(getStoredForms());
-        setNotification({message: 'Form deleted successfully!', type: 'success'});
+        setNotification({ message: 'Form deleted successfully!', type: 'success' });
       } catch (error) {
         console.error('Failed to delete form:', error);
-        setNotification({message: 'Failed to delete form!', type: 'error'});
+        setNotification({ message: 'Failed to delete form!', type: 'error' });
       }
     }
   };
@@ -109,16 +109,20 @@ const MyForms: React.FC<MyFormsProps> = ({ onLoadForm, onRouteChange, onEditForm
                 <Typography variant="h6" component="h2" gutterBottom>
                   {form.name}
                 </Typography>
-                
+
                 <Box sx={{ mb: 2 }}>
-                  <Chip 
+                  <Chip
                     label={`${form.fields.length} fields`}
                     color="primary"
                     size="small"
                     sx={{ mr: 1 }}
                   />
-                  <Chip 
-                    label={form.fields.filter(f => f.isDerived).length > 0 ? 'Has derived fields' : 'Standard form'}
+                  <Chip
+                    label={
+                      form.fields.filter(f => f.isDerived).length > 0
+                        ? 'Has derived fields'
+                        : 'Standard form'
+                    }
                     color={form.fields.filter(f => f.isDerived).length > 0 ? 'secondary' : 'default'}
                     size="small"
                   />
@@ -129,20 +133,28 @@ const MyForms: React.FC<MyFormsProps> = ({ onLoadForm, onRouteChange, onEditForm
                 </Typography>
 
                 <Box sx={{ mb: 2 }}>
-                  <Typography variant="caption" color="text.secondary" gutterBottom display="block">
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    gutterBottom
+                    display="block"
+                  >
                     Field Types:
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {Array.from(new Set(form.fields.map(f => f.type))).map(type => (
-                      <Box key={type} sx={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        fontSize: '0.75rem',
-                        p: 0.5,
-                        borderRadius: 1,
-                        bgcolor: 'rgba(25, 118, 210, 0.1)',
-                        gap: 0.5
-                      }}>
+                      <Box
+                        key={type}
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontSize: '0.75rem',
+                          p: 0.5,
+                          borderRadius: 1,
+                          bgcolor: 'rgba(25, 118, 210, 0.1)',
+                          gap: 0.5
+                        }}
+                      >
                         {fieldTypeConfig[type].icon}
                         <Typography variant="caption">
                           {fieldTypeConfig[type].label}
@@ -152,7 +164,7 @@ const MyForms: React.FC<MyFormsProps> = ({ onLoadForm, onRouteChange, onEditForm
                   </Box>
                 </Box>
               </CardContent>
-              
+
               <CardActions sx={{ justifyContent: 'space-between', p: 2 }}>
                 <Box>
                   <IconButton
@@ -162,7 +174,7 @@ const MyForms: React.FC<MyFormsProps> = ({ onLoadForm, onRouteChange, onEditForm
                   >
                     <PreviewIcon />
                   </IconButton>
-                  
+
                   <IconButton
                     onClick={() => handleEditForm(form)}
                     color="secondary"
@@ -171,7 +183,7 @@ const MyForms: React.FC<MyFormsProps> = ({ onLoadForm, onRouteChange, onEditForm
                     <EditIcon />
                   </IconButton>
                 </Box>
-                
+
                 <IconButton
                   onClick={() => deleteForm(form.id)}
                   color="error"
@@ -184,7 +196,7 @@ const MyForms: React.FC<MyFormsProps> = ({ onLoadForm, onRouteChange, onEditForm
           </Grid>
         ))}
       </Grid>
-      
+
       <Box sx={{ mt: 4, textAlign: 'center' }}>
         <Button
           variant="contained"
