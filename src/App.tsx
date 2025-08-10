@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { FormSchema } from './types/form.types';
 import Navigation from './components/common/Navigation';
 import CreateForm from './components/form-builder/CreateForm';
+import FormPreview from './components/form-builder/FormPreview';
 import './styles/animations.css';
 
 const theme = createTheme({
@@ -82,6 +83,8 @@ const App: React.FC = () => {
             isEditMode={editMode}
           />
         );
+      case 'preview':
+        return <FormPreview form={currentForm} />;
       default:
         return (
           <CreateForm
