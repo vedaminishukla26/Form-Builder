@@ -11,6 +11,7 @@ export interface ValidationRule {
     defaultValue: string | number | boolean;
     validationRules: ValidationRule[];
     options?: string[]; 
+    required?: boolean;
     isDerived?: boolean;
     derivedFrom?: string[];
     derivedFormula?: string;

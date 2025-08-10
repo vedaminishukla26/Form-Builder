@@ -72,7 +72,7 @@ const FormPreview: React.FC<FormPreviewProps> = ({ form }) => {
     }
   };
 
-  const renderField = (field: any, index: number) => {
+  const renderField = (field: any) => {
     const value = field.isDerived
       ? calculateDerivedValue(field, formData)
       : (formData[field.id] || field.defaultValue || '');
@@ -239,9 +239,9 @@ const FormPreview: React.FC<FormPreviewProps> = ({ form }) => {
         </Typography>
         
         <Box component="form" onSubmit={handleSubmit} noValidate>
-          {form.fields.map((field, index) => (
+          {form.fields.map((field) => (
             <Box key={field.id}>
-              {renderField(field, index)}
+              {renderField(field)}
             </Box>
           ))}
           
