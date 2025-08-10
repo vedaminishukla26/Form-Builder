@@ -6,6 +6,7 @@ import { FormSchema } from './types/form.types';
 import Navigation from './components/common/Navigation';
 import CreateForm from './components/form-builder/CreateForm';
 import FormPreview from './components/form-builder/FormPreview';
+import MyForms from './components/my-forms/MyForms';
 import './styles/animations.css';
 
 const theme = createTheme({
@@ -85,6 +86,14 @@ const App: React.FC = () => {
         );
       case 'preview':
         return <FormPreview form={currentForm} />;
+      case 'myforms':
+        return (
+          <MyForms
+            onLoadForm={handleLoadForm}
+            onRouteChange={handleRouteChange}
+            onEditForm={handleEditForm}
+          />
+        );
       default:
         return (
           <CreateForm

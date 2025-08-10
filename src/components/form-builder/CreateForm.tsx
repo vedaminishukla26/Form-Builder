@@ -20,6 +20,7 @@ import {
 
 import { FormField, FormSchema, FieldType } from '../../types/form.types';
 import { fieldTypeConfig } from '../../constants/fieldTypes';
+import { saveForm } from '../../utils/storage';
 import FieldConfiguration from './FieldConfiguration';
 
 interface CreateFormProps {
@@ -82,6 +83,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ currentForm, onFormUpdate, isEd
         createdAt: currentForm?.createdAt || new Date().toISOString()
       };
 
+      saveForm(form);
       onFormUpdate(form);
       setSaveDialogOpen(false);
       setNotification({message: 'Form saved successfully!', type: 'success'});
